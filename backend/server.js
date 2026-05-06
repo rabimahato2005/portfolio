@@ -26,8 +26,11 @@ db.connect((err) => {
 });
 
 // ── Test Route ──
-app.get("/", (req, res) => {
-    res.send("Backend is running 🚀");
+app.get("/test-db", (req, res) => {
+    db.query("SELECT 1", (err) => {
+        if (err) return res.send("DB NOT CONNECTED ❌");
+        res.send("DB CONNECTED ✅");
+    });
 });
 
 // ── CONTACT API (FIXED ROUTE) ──
