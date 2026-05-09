@@ -87,7 +87,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
   label.textContent = 'Sending…';
 
   try {
-    fetch("https://portfolio-backend-xneg.onrender.com/contact", {
+    fetch("https://portfolio-backend-xneg.onrender.com/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
