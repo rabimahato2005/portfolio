@@ -87,7 +87,8 @@ document.getElementById('contactForm').addEventListener('submit', async function
   label.textContent = 'Sending…';
 
   try {
-    fetch("https://portfolio-backend-xneg.onrender.com/api/contact", {
+
+    const res = await fetch("https://portfolio-backend-xneg.onrender.com/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -99,13 +100,16 @@ document.getElementById('contactForm').addEventListener('submit', async function
 
     if (data.success) {
       status.className = 'form-status ok';
-      status.textContent = '✓ Message sent successfully!';
+      status.textContent = '✅ Message sent successfully!';
       this.reset();
     } else {
       throw new Error();
     }
 
   } catch (error) {
+
+    console.log(error);
+
     status.className = 'form-status err';
     status.textContent = '⚠ Something went wrong!';
   }
