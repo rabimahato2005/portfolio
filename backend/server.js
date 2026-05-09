@@ -27,14 +27,12 @@ db.connect((err) => {
 });
 
 // ── Test Route ──
-app.get("/test-db", (req, res) => {
-    db.query("SELECT 1", (err) => {
-        if (err) return res.send("DB NOT CONNECTED ❌");
-        res.send("DB CONNECTED ✅");
+app.get("/", (req, res) => {
+    res.send("Backend is running 🚀");
     });
-});
+    
 
-// ── CONTACT API (FIXED ROUTE) ──
+// CONTACT API (FIXED ROUTE)
 app.post("/api/contact", (req, res) => {
     const { name, email, topic, message } = req.body;
 
