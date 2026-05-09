@@ -37,13 +37,14 @@ app.post("/api/contact", (req, res) => {
     console.log(req.body);
 
     const { name, email, topic, message } = req.body;
+    const finalTopic = topic || "other";
 
     const sql = `
         INSERT INTO messages (name, email, topic, message)
         VALUES (?, ?, ?, ?)
     `;
 
-    db.query(sql, [name, email, topic, message], (err, result) => {
+    db.query(sql, [name, email, finalTopic, message], (err, result) => {
 
         if (err) {
             console.log("DB ERROR:", err);
