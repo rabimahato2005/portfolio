@@ -32,35 +32,31 @@ app.get("/", (req, res) => {
     });
     
 
-// CONTACT API (FIXED ROUTE)
 app.post("/api/contact", (req, res) => {
+
+    console.log(req.body);
+
     const { name, email, topic, message } = req.body;
 
-    // validation (important)
-    if (!name || !email || !message) {
-        return res.status(400).json({
-            success: false,
-            message: "Missing required fields"
-        });
-    }
-
-    const sql =
-        "INSERT INTO messages (name, email, topic, message) VALUES (?, ?, ?, ?)";
+    const sql = `
+        INSERT INTO messages (name, email, topic, message)
+        VALUES (?, ?, ?, ?)
+    `;
 
     db.query(sql, [name, email, topic, message], (err, result) => {
+
         if (err) {
-            console.log("DB Error:", err);
+            console.log("DB ERROR:", err);
             return res.status(500).json({
                 success: false,
-                message: "Database error"
+                error: err
             });
         }
 
-        console.log("📩 Saved in DB ID:", result.insertId);
+        console.log("✅ Saved:", result.insertId);
 
         res.json({
-            success: true,
-            message: "Message saved successfully"
+            success: true
         });
     });
 });
